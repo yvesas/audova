@@ -7,6 +7,7 @@ FROM base AS deps
 COPY package.json package-lock.json* ./
 COPY apps/web/package.json apps/web/package.json
 COPY packages/shared/package.json packages/shared/package.json
+COPY packages/db/package.json packages/db/package.json
 RUN npm install --workspaces --include-workspace-root --no-audit --no-fund
 
 # ---- build ----
