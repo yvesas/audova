@@ -44,6 +44,11 @@ export const jobsRelations = relations(jobs, ({ one }) => ({
     fields: [jobs.transcriptId],
     references: [transcripts.id],
   }),
+  user: one(users, { fields: [jobs.userId], references: [users.id] }),
+  anonSession: one(anonSessions, {
+    fields: [jobs.anonSessionId],
+    references: [anonSessions.id],
+  }),
 }));
 
 export const usageEventsRelations = relations(usageEvents, ({ one }) => ({

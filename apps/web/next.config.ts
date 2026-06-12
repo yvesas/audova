@@ -10,7 +10,10 @@ const nextConfig: NextConfig = {
   // (and to ignore unrelated lockfiles elsewhere on the machine).
   outputFileTracingRoot: path.join(dirname, "../.."),
   // Workspace packages are shipped as TypeScript and transpiled by Next.
-  transpilePackages: ["@audova/shared"],
+  transpilePackages: ["@audova/shared", "@audova/db"],
+  // pg uses dynamic requires (pg-native, cloudflare:sockets) — keep it a runtime require
+  // instead of bundling it into the server output.
+  serverExternalPackages: ["pg"],
   typedRoutes: true,
   // Linting is run separately (`npm run lint`) with the repo-wide flat config and in CI.
   eslint: { ignoreDuringBuilds: true },

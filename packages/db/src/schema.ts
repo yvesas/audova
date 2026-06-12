@@ -109,15 +109,28 @@ export const jobs = pgTable(
     transcriptId: text("transcript_id")
       .unique()
       .references(() => transcripts.id, { onDelete: "set null" }),
+    // owner carried from job creation → applied to the transcript + usage when it completes
+    userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
+    anonSessionId: text("anon_session_id").references(() => anonSessions.id, {
+      onDelete: "cascade",
+    }),
     status: jobStatusEnum("status").notNull().default("QUEUED"),
     progress: integer("progress").notNull().default(0), // 0–100
     error: text("error"),
     attempts: integer("attempts").notNull().default(0),
+    sourceType: sourceTypeEnum("source_type").notNull().default("YOUTUBE"),
     sourceUrl: text("source_url"),
+    youtubeVideoId: text("youtube_video_id"),
+    language: text("language"), // forced input language, if any
+    forceWhisper: boolean("force_whisper").notNull().default(false), // skip the captions shortcut
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
-  (t) => [index("jobs_status_idx").on(t.status)],
+  (t) => [
+    index("jobs_status_idx").on(t.status),
+    index("jobs_user_idx").on(t.userId),
+    index("jobs_anon_idx").on(t.anonSessionId),
+  ],
 );
 
 // ---- usageEvents (quota) ----
