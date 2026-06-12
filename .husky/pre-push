@@ -1,0 +1,2 @@
+node scripts/block-main-push.mjs
+npm run typecheck

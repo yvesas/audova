@@ -1,0 +1,11 @@
+# Optional self-hosted Whisper sidecar. Only runs with: docker compose --profile local-stt up
+# Then set STT_PROVIDER=local. Zero code change (the abstraction handles it).
+services:
+  local-whisper:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    environment:
+      ASR_MODEL: small # tune to what the machine can handle
+      ASR_ENGINE: faster_whisper
+    ports:
+      - "9000:9000"
+    profiles: ["local-stt"]

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Dark mode via a .dark class on <html> (light is the default). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Audova design tokens — subtle palette, one restrained accent.
+   See .claude/rules/ux-ui.md */
+@theme {
+  --color-bg: #fbfbfd;
+  --color-surface: #ffffff;
+  --color-border: #e7e7ec;
+  --color-fg: #1a1a22;
+  --color-muted: #6b7280;
+
+  --color-accent: #6366f1;
+  --color-accent-hover: #4f46e5;
+
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  --radius-xl: 0.9rem;
+
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-bg: #0e0e12;
+  --color-surface: #17171d;
+  --color-border: #2a2a33;
+  --color-fg: #ececf1;
+  --color-muted: #9ca3af;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}

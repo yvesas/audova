@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnp.*
+screenshorts/
+
+# Build output
+.next/
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Env / secrets — only .env.example is tracked
+.env
+.env.*
+!.env.example
+
+# Drizzle (keep committed migrations under ./drizzle; ignore local artifacts)
+drizzle/.snapshot/
+drizzle/meta/_journal.tmp
+
+# Local data / ephemeral audio
+/data/
+*.tmp
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Claude Code local overrides (personal, not shared)
+.claude/settings.local.json
