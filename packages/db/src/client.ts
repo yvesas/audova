@@ -20,3 +20,11 @@ export function getDb(connectionString = process.env.DATABASE_URL) {
 }
 
 export type Database = ReturnType<typeof getDb>;
+
+/** Close the shared pool (tests / graceful shutdown). */
+export async function endDb(): Promise<void> {
+  if (pool) {
+    await pool.end();
+    pool = null;
+  }
+}
